@@ -3,16 +3,24 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "start:prod": "http-server dist/client -c-1 --gzip --proxy http://localhost:8080?",
     "workboxSW": "workbox injectManifest",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-postbuild":"ng build --prod"
+  },
+  "engines":{
+    "node":"12.15.0",
+    "npm":"6.13.4"
   },
   "private": true,
   "dependencies": {
+    "express": "^4.17.1",
+    "@angular/cli": "~9.1.0",
+    "@angular/compiler-cli": "~9.1.0",
     "@angular/animations": "~9.1.0",
     "@angular/cdk": "^9.2.1",
     "@angular/common": "~9.1.0",
@@ -32,7 +40,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "typescript": "~3.8.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1000.4",
