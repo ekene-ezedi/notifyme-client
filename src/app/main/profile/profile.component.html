@@ -1,0 +1,69 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+    <form method="post" enctype="multipart/form-data" (change)="onUpload($event)" style="display: none;">
+        <input type="file" name="channelbg" accept="image/*" style="display: none;" #fileInput>
+    </form>
+     
+    <img class="pointer" (click)="fileInput.click()" mat-card-avatar *ngIf="!user?.imgurl" src="../../../assets/images/ic_person_outline_black_48dp.png" alt="avatar">
+    <img class="pointer" (click)="fileInput.click()" *ngIf="user?.imgurl" [src]="user?.imgurl" alt="avatar" width="70px" height="70px" style="border-radius: 50%;">
+
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+        <h3>Basic info</h3>
+        <button mat-fab (click)="editMode == true ? editMode = false : editMode = true">Edit</button>
+    </div>
+
+    <mat-card *ngIf="!editMode" [ngStyle.gt-xs]="{'width':'95%'}" [ngStyle.xs]="{'width':'90%'}">
+        <mat-card-content>
+            <div fxLayout="column">
+                <h3><b>Firstname : </b> {{user?.firstname}} </h3>
+                <h3><b>Lastname : </b> {{user?.lastname}} </h3>
+                <h3><b>Email : </b> {{user?.email}} </h3>
+                <h3><b>Occupation : </b> {{user?.occupation}} </h3>
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="editMode" [ngStyle.gt-xs]="{'width':'95%'}" [ngStyle.xs]="{'width':'90%'}">
+        <mat-card-content>
+            <form #profileform="ngForm" fxLayout="column">
+                <div fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="center" fxLayoutGap="5px">
+                    <mat-form-field appearance="outline">
+                        <input ngModel name="firstname" #firstname="ngModel" matInput type="text" [placeholder]="user?.firstname">
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="outline">
+                        <input ngModel name="lastname" #lastname="ngModel" matInput type="text" [placeholder]="user?.lastname">
+                    </mat-form-field>
+                </div>
+        
+               <div fxLayout.lt-md="column" fxLayoutAlign="center">
+                <mat-form-field appearance="outline">
+                    <input ngModel name="email" #emailInput="ngModel" matInput type="email" [placeholder]="user?.email">
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <input ngModel name="occupation" #occupation="ngModel" matInput type="text" [placeholder]="user?.occupation">
+                </mat-form-field>
+               </div>
+
+               <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="5px">
+                   <button mat-stroked-button color="primary" (click)="pswFormToggle == true ? pswFormToggle = false : pswFormToggle = true">Change Password</button>
+
+                   <div *ngIf="pswFormToggle" fxLayout.gt-xs="row" fxLayout.lt-sm="column" fxLayoutAlign="center" fxLayoutGap="5px">
+                    <mat-form-field appearance="outline">
+                        <mat-label>New Password</mat-label>
+                        <input ngModel name="password" matInput type="password">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Confirm Password</mat-label>
+                        <input ngModel name="password2" matInput type="password">
+                    </mat-form-field>
+                   </div>
+               </div>
+        
+                <button mat-raised-button color="primary" (click)="onSave(profileform)" style="margin-top: 5px;">Save</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</section>

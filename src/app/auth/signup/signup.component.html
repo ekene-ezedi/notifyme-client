@@ -1,0 +1,72 @@
+<div *ngIf="!isRegistered" fxLayout="column" fxLayoutAlign="center center" style="height: 100%;" fxLayoutGap.lt-md="200px">
+    <div> </div>
+    <mat-card fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <mat-card-header>
+            <small>Already registered? &nbsp;<a routerLink="/signin" mat-stroked-button color="primary">sign in!</a> </small>
+        </mat-card-header>
+        <mat-card-content>
+            <form (ngSubmit)="onSubmit(signupform)" #signupform="ngForm" fxLayout="column" fxLayout.lt-md="column" fxLayoutAlign="center">
+                <div id="fullname" fxLayout.lt-md="column" fxLayoutAlign="center">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter Firstname</mat-label>
+                        <input ngModel name="firstname" #firstname="ngModel" required matInput type="text" placeholder="Enter Firstname">
+                        <mat-error [hidden]="firstname.valid">Firstname field cannot be empty</mat-error>
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter Lastname</mat-label>
+                        <input ngModel name="lastname" #lastname="ngModel" required matInput type="text" placeholder="Enter Lastname">
+                        <mat-error [hidden]="lastname.valid">Lastname field cannot be empty</mat-error>
+                    </mat-form-field>
+                </div>
+        
+               <div id="emailpassword" fxLayout.lt-md="column" fxLayoutAlign="center">
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter Email</mat-label>
+                    <input ngModel name="email" #emailInput="ngModel" email required matInput type="email" placeholder="Enter Email">
+                    <mat-error *ngIf="emailInput.hasError('required')">Email field cannot be empty</mat-error>
+                    <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error>
+                    <mat-hint>johndoe@email.com</mat-hint>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>What's your occupation?</mat-label>
+                    <input ngModel name="occupation" #occupation="ngModel" required matInput type="text" placeholder="Enter Occupation">
+                    <mat-error [hidden]="occupation.valid">Occupation field cannot be empty</mat-error>
+                    <mat-hint>Marketer</mat-hint>
+                </mat-form-field>
+               </div>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter password</mat-label>
+                    <input ngModel name="password" #password="ngModel" required minlength="8" matInput type="password" placeholder="Enter password">
+                    <mat-hint>Min characters : 8</mat-hint>
+                    <mat-error *ngIf="password.hasError('required')">Password field cannot be empty</mat-error>
+                    <mat-error *ngIf="!password.hasError('required')">Password must be at least 8 characters long!</mat-error>
+                </mat-form-field>
+                <button [disabled]="signupform.invalid" mat-raised-button color="primary" type="submit">Sign Up</button>
+            </form>
+        </mat-card-content>
+        <mat-card-footer fxLayout="column">
+            <!-- <p style="margin-top: 30px;" style="text-align: center;">OR</p> -->
+
+            <!-- <div id="oauth" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="10px">
+                <button mat-button style=" background-color: blue; color: white;">
+                    <fa-icon [icon]="faFacebookF" [styles]="{ 'color': 'white','font-size':'1em'}"></fa-icon>
+                    Continue with facebook
+                </button>
+                <button mat-button style=" background-color: red; color: white;">
+                    <fa-icon [icon]="faGoogle" [styles]="{ 'color': 'white','font-size':'1em'}"></fa-icon>
+                    Continue with google
+                </button>
+            </div> -->
+        </mat-card-footer>
+    </mat-card>
+
+</div>
+
+<div *ngIf="isRegistered" fxLayoutAlign="center center" style="margin-top:80px">
+    <mat-card>
+        <p>A verification link has been sent to you email address, click on the link to verify your account!</p>
+    </mat-card>
+</div>

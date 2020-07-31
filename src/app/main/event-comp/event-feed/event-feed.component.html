@@ -1,0 +1,28 @@
+<section>
+    <h3 *ngIf="events?.length == 0" style="text-align: center;">No events on your feed,to see events, please subscribe to a channel!</h3>
+    <mat-card *ngFor="let event of events; let i=index">
+        <mat-card-header fxLayout>
+            <img mat-card-avatar [src]="event?.channelId.imgurl" alt="banner" width="10%">
+            <div>
+                <h2 [routerLink]="['/channel',event.channelId._id]" class="pointer">{{event?.channelId.name}}</h2>
+                <small>{{SharedService.formatAMPM(event?.date)}}</small>
+            </div>
+        </mat-card-header>
+    
+        <mat-card-content>
+            <div [routerLink]="['/event',event._id]" class="pointer">
+                <h2>{{event?.name}}</h2>
+                <img *ngIf="!event?.imgurl" src="../../../../assets/images/images-button.png" alt="banner" height="300px" style="opacity:0.5">
+                    <img *ngIf="event?.imgurl" [src]="event?.imgurl" alt="banner" style="height: auto; width:100%">
+                <p>{{SharedService.truncateTxt(event?.description)}}</p>
+            </div>
+
+            <div fxLayout fxLayoutGap="20px">
+                <div fxLayout>
+                    <button mat-button (click)="onLike(event,i)"><mat-icon>thumb_up</mat-icon></button>
+                    <p style="margin-top:15px" *ngIf="event.likes.length !== 0">{{event.likes.length}}</p>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</section>

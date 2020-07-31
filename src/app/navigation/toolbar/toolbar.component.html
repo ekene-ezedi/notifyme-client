@@ -1,0 +1,37 @@
+<header>
+    <div *ngIf="isAuth" fxLayout="row" fxLayoutAlign="center">
+        <img src="../../../assets/AppIcons/android/mipmap-mdpi/notifymeicon.png" alt="notifymeicon">
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end" fxLayoutGap="20px">
+            <div fxLayout="row" fxLayoutGap="20px" >
+                <button mat-icon-button routerLink="/home">
+                    <mat-icon>home</mat-icon>
+                </button>
+
+                <button mat-icon-button routerLink="/home/explore">
+                    <mat-icon>explore</mat-icon>
+                </button>
+
+                <button mat-icon-button routerLink="/home/notifications">
+                    <mat-icon>notifications</mat-icon>
+                </button>
+            </div>
+            <button mat-icon-button (click)="onToggleSidenav()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="!isAuth" fxLayout="row" fxLayoutAlign="space-between">
+        <img src="../../../assets/AppIcons/android/mipmap-mdpi/notifymeicon.png" alt="notifymeicon">
+        <div fxHide.xs fxLayoutGap="20px">
+            <button mat-raised-button routerLink="signup">Signup</button> 
+            <button mat-raised-button routerLink="signin">Signin</button> 
+        </div>
+        <div fxHide.gt-xs>
+            <button mat-icon-button (click)="onToggleSidenav()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+        
+    </div>
+</header>

@@ -1,0 +1,20 @@
+<div *ngIf="events.length == 0">
+    <h3>No Upcoming Events</h3>
+</div>
+<mat-card class="pointer" *ngFor="let event of events" fxLayout fxLayoutGap="30px" (click)="onEvent(event._id)">
+    <div fxLayout="column" fxLayoutAlign="center">
+        <img mat-card-avatar [src]="event?.imgurl" [alt]="event.name" style="width: 50px; height: 50px; border-radius: 100%;">
+    </div>
+
+    <div fxLayout="column">
+        <mat-card-content>
+            <h2>{{event?.name}}</h2>
+            <div fxLayout fxLayoutGap="30px">
+                <div>{{event?.date | date}}</div>
+                <div>{{SharedService.formatAMPM(event?.date)}}</div>
+            </div>
+    
+            <div>{{event?.venue}}</div>
+        </mat-card-content>
+    </div>
+</mat-card>

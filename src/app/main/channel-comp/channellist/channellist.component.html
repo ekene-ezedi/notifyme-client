@@ -1,0 +1,29 @@
+<section id="channelList">
+    <div fxLayout fxLayoutAlign="center" fxLayoutGap="10px">
+        <form style="margin-top: 15px;" #search = "ngForm">
+            <mat-form-field fxLayoutAlign="center">
+                <mat-label>search</mat-label>
+                <input type="text" ngModel name="search" matInput>
+            </mat-form-field>
+        </form>
+        <button fxFlexAlign="center" (click)="onSearch(search)" mat-button style="height: 40px; background-color: blue; color: white;">Search</button>
+    </div>
+    <h3 style="text-align: center;">These channels match your interest</h3>
+    <div fxLayout="row" fxLayoutAlign="center"  *ngFor="let channel of channels; let i=index">
+        <mat-card fxLayout fxLayoutAlign="space-around" style="margin:10px 5px;">
+            <div fxFlex="60" (click)="onChannel(channel._id)" fxLayout fxLayoutGap="10px">
+                <img fxFlexAlign="center" mat-card-avatar [src]="channel?.imgurl" [alt]="channel.name" style="width: 50px; height: 50px; border-radius: 100%;">
+                <div fxFlexAlign="center" fxLayout="column">
+                    <h3 style="margin-bottom: 0px;  white-space: wrap;">{{channel.name}}</h3>
+                    <small>Members : {{channel.subscribers.length}}</small>
+                </div> 
+            </div>
+            <div fxFlex="30" fxFlexAlign="center">
+                <button *ngIf="!channel.subscribers.includes(user)" mat-raised-button fxFlexAlign="center" style=" color: white;" class="notifymeColor" (click)="onSubscribe(channel,i)">subscribe</button>
+
+                <button *ngIf="channel.subscribers.includes(user)" mat-raised-button fxFlexAlign="center" style=" color: blue;" (click)="onUnsubscribe(channel,i)">unsubscribe</button>
+            </div>
+        </mat-card>
+    </div>
+    
+</section>

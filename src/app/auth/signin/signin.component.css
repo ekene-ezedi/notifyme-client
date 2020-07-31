@@ -1,0 +1,20 @@
+mat-card{
+    width: 450px;
+}
+
+form{
+    min-width: 300px;
+}
+
+mat-card-footer{
+    padding: 0px 10px;    
+    margin-bottom: 10px;
+}
+
+#passwordReset{
+    margin: 10px 50px;
+}
+
+#oauth button{
+    margin:5px;
+}

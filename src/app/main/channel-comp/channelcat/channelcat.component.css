@@ -1,0 +1,21 @@
+section{
+    margin-top: 80px;
+}
+
+.clickedColor{
+    background-color: #304FFE;
+    color: white;
+}
+
+h1,h3{
+    text-align: center;
+    font-weight: lighter;
+}
+
+#nextBtn{
+    background-color: blue;
+    color: white;
+    position: fixed;
+    top:90%;
+    right: 5%;
+}

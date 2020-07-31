@@ -1,0 +1,16 @@
+<mat-sidenav-container style="height: 100%;">
+    <mat-sidenav #sidenav>
+        <app-sidenav (closeSidenav)="sidenav.close()"></app-sidenav>
+    </mat-sidenav>
+
+    <mat-sidenav-content [ngClass] = "themeMode == 'light' ? 'light':'dark'">
+        <app-loader></app-loader>
+        <app-toolbar (sidenavToggle)="sidenav.toggle()" style="position: fixed;width: 100%; z-index: 2;"></app-toolbar>
+        <app-loader></app-loader>
+        <div fxLayout="row" fxLayoutAlign="center" style="height: 100%;">
+            <div fxFlex.gt-xs="50%" fxFlex.lt-sm="100%">
+                <router-outlet ></router-outlet>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

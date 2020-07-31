@@ -1,0 +1,60 @@
+mat-sidenav-container{
+    height: 100%;
+}
+
+::ng-deep /deep/ .light{
+    background-color: white;
+}
+
+::ng-deep /deep/ .dark{
+    background-color: #121212;
+}
+
+::ng-deep /deep/ .dark mat-card{
+    /* background-color: rgb(20, 19, 19); */
+    background-color: #424242;
+    color:white
+}
+
+::ng-deep /deep/ .dark mat-label{
+    color:white
+}
+
+::ng-deep /deep/ .dark h1{
+    color:white
+}
+
+::ng-deep /deep/ .dark h2{
+    color:white
+}
+
+::ng-deep /deep/ .dark h3{
+    color:white
+}
+
+::ng-deep /deep/ .dark p{
+    color:white
+}
+
+::ng-deep /deep/ .dark mat-hint{
+    color:white
+}
+
+::ng-deep /deep/ .dark section{
+    color:white
+}
+
+::ng-deep /deep/ .dark .mat-tab-label{
+    color:white
+}
+
+/* ::ng-deep /deep/ .light{
+    background-color: white;
+}
+::ng-deep /deep/ .light h1{
+    color: green;
+}
+
+::ng-deep /deep/ .light h2{
+    color: green;
+} */

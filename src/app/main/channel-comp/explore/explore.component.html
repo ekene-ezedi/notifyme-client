@@ -1,0 +1,26 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout fxLayoutAlign="center" fxLayoutGap="10px">
+        <form style="margin-top: 15px;" #search = "ngForm">
+            <mat-form-field fxLayoutAlign="center">
+                <mat-label>search</mat-label>
+                <input type="text" ngModel name="search" matInput>
+            </mat-form-field>
+        </form>
+        <button fxFlexAlign="center" (click)="onSearch(search)" mat-button style="height: 40px; background-color: blue; color: white;">Search</button>
+    </div>
+
+    <mat-card class="pointer" *ngFor="let channel of channels; let i=index" [ngStyle.gt-xs]="{'width':'70%'}" [ngStyle.xs]="{'width':'90%'}">
+        <mat-card-content>
+            <div fxFlex="70" (click)="onChannel(channel._id)" fxLayout fxLayoutGap="10px">
+                <img fxFlexAlign="center" mat-card-avatar [src]="channel?.imgurl" alt="channel background" style="width: 50px; height: 50px; border-radius: 100%;">
+                <div fxFlexAlign="center" fxLayout="column">
+                    <h3 style="margin-bottom: 0px;  white-space: wrap;">{{channel.name}}</h3>
+                    <small>Members : {{channel.subscribers.length}}</small>
+                </div> 
+            </div>
+            <div fxFlex="20" fxFlexAlign="center">
+                <button mat-raised-button fxFlexAlign="center" style=" color: white;" class="notifymeColor" (click)="onSubscribe(channel,i)">{{channel.subscribers.includes(user) ? 'subscribed' : 'subscribe'}}</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</section>

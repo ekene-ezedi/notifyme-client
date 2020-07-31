@@ -1,0 +1,152 @@
+<section>
+    <div>
+        <div id="banner" fxLayout="column" fxLayoutAlign="center" >
+            <form method="post" enctype="multipart/form-data" (change)="onUpload($event)" style="display: none;">
+              <input type="file" name="channelbg" accept="image/*" style="display: none;" #fileInput>
+            </form>
+            <img [src]="event?.imgurl" alt="Event background" height="300px">
+            <button *ngIf="isAdmin" mat-button type="submit" (click)="fileInput.click()" style="position: absolute; top: 70px;"><mat-icon>add_a_photo</mat-icon></button>
+          </div>
+        <div fxLayout fxLayoutAlign="space-between">
+            <div fxLayout fxLayoutGap="10px" fxLayoutAlign="start center" style="padding:10px">
+                <div>
+                    <button *ngIf="!SharedService.isAdmin(event?.admin._id)" mat-button style="background-color: blue; color: white; height: 40px;" (click)="onGoing()">Attend</button>
+                </div>
+                <div>
+                    <h3 style="margin-top: 15px;">{{event?.attendees.length}} Attending</h3>
+                </div>
+            </div>
+            <div style="padding: 0px 5px;">
+                <button *ngIf="SharedService.isAdmin(event?.admin._id)" id="editBtn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="options"><mat-icon>more_vert</mat-icon></button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="onEdit()">
+                    <!-- <mat-icon>dialpad</mat-icon> -->
+                    <span>Edit</span>
+                  </button>
+                  <button mat-menu-item (click)="onDelete()">
+                    <!-- <mat-icon>voicemail</mat-icon> -->
+                    <span>Delete</span>
+                  </button>
+                  <button mat-menu-item (click)="onNotifySubscribers()">
+                    <!-- <mat-icon>voicemail</mat-icon> -->
+                    <span>Notify Subscribers</span>
+                  </button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+
+    <mat-card>
+        <mat-card-content>
+            <h1>{{event?.name}}</h1>
+            <h3>{{event?.date | date:'fullDate'}}</h3>
+            <div fxLayoutAlign="start center" fxLayoutGap="10px">
+                <img fxFlexAlign="center" mat-card-avatar [src]="event?.admin.imgurl" alt="avatar" style="width: 50px; height: 50px; border-radius: 100%;">
+                <h3 fxFlexAlign="center">Hosted by {{event?.admin.firstname}}</h3>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-content>
+            <h3><b>Time: </b> {{event?.time}}</h3>
+            <h3><b>Venue: </b> {{event?.venue}}</h3>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header><h1 style="text-align: center;">Details</h1></mat-card-header>
+        <mat-card-content>
+            <div fxLayout="row wrap" style="overflow-wrap: break-word;">
+                <p>{{event?.description}}</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <h3 *ngIf="event?.guests.length == 0" style="text-align: center;">{{event?.name}} has no guest.</h3>
+
+        <div *ngIf="SharedService.isAdmin(event?.admin._id)" fxLayout fxLayoutAlign="space-between">
+            <h2 *ngIf="event?.guests.length > 0">Guests</h2>
+            <button *ngIf="event?.guests.length > 0" mat-button (click)="onUpdateGuestToggle()"><mat-icon>create</mat-icon></button>
+        </div>
+        <div *ngIf="event?.guests.length !== 0" fxLayout fxLayoutAlign="center center" fxLayoutGap="20px">
+            <button *ngIf="!updateGuest && event?.guests.length > 1" fxHide.lt-sm mat-fab style="width: 50px; height: 50px;" (click)="onPrev()"> < </button>
+            <mat-card [@guestState] = "animateState">
+                <mat-card-content *ngIf="!updateGuest" fxLayout="column" fxLayoutAlign="center center">
+                    <img fxFlexAlign="center" [src]="guest?.img" width="70px" height="70px" style="border-radius: 100%;">
+                    <h3>{{guest?.name}}</h3>
+                    <h3>{{guest?.role}}</h3>
+                </mat-card-content>
+
+                <mat-card-content *ngIf="updateGuest" fxLayout="column" fxLayoutGap="10px">
+                    <mat-expansion-panel *ngFor="let guest of event?.guests; let i = index">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{guest?.name}}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ng-template matExpansionPanelContent>
+                            <form fxLayout="column" fxLayoutAlign="center center" #guestform = "ngForm">
+                                <div  fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="10px">
+                                    <mat-form-field>
+                                        <mat-label>{{guest?.name}}</mat-label>
+                                        <input ngModel name="name" #nameInput="ngModel" matInput type="text">
+                                    </mat-form-field>
+                    
+                                    <mat-form-field>
+                                        <mat-label>{{guest?.role}}</mat-label>
+                                        <input ngModel name="role" #roleInput="ngModel" matInput type="text">
+                                    </mat-form-field>
+                                </div>
+                
+                                <mat-form-field>
+                                    <mat-label>{{guest?.img}}</mat-label>
+                                    <input ngModel name="img" #imgInput="ngModel" matInput type="text">
+                                </mat-form-field>
+                
+                                <div fxLayout fxLayoutAlign="center" fxLayoutGap="30px">
+                                    <button style="background-color: red; color:white" mat-raised-button (click)="onDeleteGuest(i)">Delete</button>
+                                    <button style="background-color: blue; color:white" mat-raised-button (click)="onUpdateGuest(guestform,i)">Update</button>
+                                </div>
+                            </form> 
+                        </ng-template>
+                        
+                    </mat-expansion-panel>
+                </mat-card-content>
+            </mat-card>
+
+            <button  *ngIf="!updateGuest && event?.guests.length > 1" fxHide.lt-sm mat-fab style="width: 50px; height: 50px;" (click)="onNext()"> > </button>
+        </div>
+        <div *ngIf="event?.guests.length > 1 && !updateGuest" fxLayoutAlign="center" fxLayoutGap="5px">
+            <p *ngFor="let guest of event?.guests; let i = index " [ngStyle]="{backgroundColor:getIndex(i)}" style="width: 10px; height: 10px; border-radius: 100%;"></p>
+        </div>
+
+        <div fxLayout fxLayoutAlign="center">
+            <button *ngIf="isAdmin && !updateGuest" mat-raised-button (click)="toggleGuestForm ==false ? toggleGuestForm = true : toggleGuestForm = false">Add Guest</button>
+        </div>
+
+        <mat-card-content *ngIf="toggleGuestForm">
+            <form fxLayout="column" fxLayoutAlign="center center" #guestform = "ngForm">
+                <div fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap.gt-xs="10px">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input ngModel name="name" #nameInput="ngModel" required matInput type="text">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Role</mat-label>
+                        <input ngModel name="role" #roleInput="ngModel" required matInput type="text">
+                    </mat-form-field>
+                </div>
+
+                <!-- <mat-form-field appearance="outline">
+                    <mat-label>Image url</mat-label>
+                    <input ngModel name="img" #imgInput="ngModel" required matInput type="text">
+                </mat-form-field> -->
+
+                <div fxLayout fxLayoutAlign="center">
+                    <button [disabled]="guestform.invalid" color="primary" mat-raised-button (click)="onSave(guestform)">Save</button>
+                </div>
+            </form> 
+        </mat-card-content>
+    </mat-card>
+</section>

@@ -1,0 +1,29 @@
+<section fxLayout='column' fxLayoutAlign="center">
+    <h3 style="text-align: center;">Notifications</h3>
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <mat-card *ngFor="let event of events" [ngStyle.gt-sm]="{'width':'65%'}" [ngStyle.xs]="{'width':'95%'}">
+            <mat-card-content fxLayout fxLayoutGap="30px">
+                <img fxFlexAlign="center" mat-card-avatar [src]="event?.imgurl" alt="event background" style="width: 50px; height: 50px; border-radius: 100%;">
+                <div style="width: 100%;">
+                    <div fxLayout fxLayoutAlign='space-between'>
+                        <h3>{{event?.name}}</h3>
+                        <mat-chip-list>
+                            <mat-chip color="primary" selected>Attending</mat-chip>
+                        </mat-chip-list>
+                    </div>
+                    <div fxLayout fxLayoutAlign='space-between'>
+                        <div fxLayout fxLayoutGap="10px">
+                            <mat-icon color="primary" selected>today</mat-icon>
+                            <h3>{{event?.date | date}}</h3>
+                        </div>
+
+                        <div fxLayout fxLayoutGap="10px">
+                            <mat-icon color="primary">alarm</mat-icon>
+                            <h3>{{SharedService.formatAMPM(event?.date)}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</section>

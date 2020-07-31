@@ -1,0 +1,19 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+    <h1 style="text-align: center;">Your Subscriptions</h1>
+    <mat-card *ngFor="let channel of channels; let i = index" class="pointer" [ngStyle.gt-xs]="{'width':'70%'}" [ngStyle.xs]="{'width':'90%'}">
+        <mat-card-content>
+            <div fxFlex="65" fxLayout fxLayoutGap="10px" (click)="onChannel(channel._id)">
+                <img mat-card-avatar [src]="channel?.imgurl" alt="channel img">
+                <div fxLayout="column">
+                    <h3 style="margin-bottom: 0px;  white-space: wrap;">{{channel.name}}</h3>
+                    <small>Members : {{channel.subscribers.length}}</small>
+                </div> 
+            </div>
+            <div fxFlex="30">
+                <button mat-raised-button fxFlexAlign="center" style=" color: blue;" (click)="onUnsubscribe(channel,i)">unsubscribe</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <h3 *ngIf="channels?.length == 0">You haven't subscribed to any channel yet</h3>
+</section>

@@ -1,0 +1,44 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+    <mat-card>
+        <mat-card-header>Create an Event</mat-card-header>
+        <mat-card-content>
+            <form fxLayout="column" (ngSubmit)="onSubmit(eventForm)" #eventForm = "ngForm">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input type="text" name="name" ngModel matInput #name required>
+                    <mat-error [hidden]="name.valid">Event must have a Name</mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea name="description" matInput ngModel #description cdkTextareaAutosize required></textarea>
+                    <mat-hint align="end">{{description.value.length}} / 400</mat-hint>
+                    <mat-error [hidden]="description.valid">Event must have a Description</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" [min]="minDate" ngModel name="date" #date required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error [hidden]="date.valid">Event must hav a Date</mat-error>
+                </mat-form-field>
+                            
+                <mat-form-field appearance="outline">
+                    <mat-label>Time</mat-label>
+                    <input type="time" name="time" ngModel matInput #time required>
+                    <mat-error [hidden]="time.valid">Event must have a Time</mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>Venue</mat-label>
+                    <input type="text" name="venue" ngModel matInput #venue required>
+                    <mat-error [hidden]="venue.valid">Event must have a Venue</mat-error>
+                </mat-form-field>
+
+                <button mat-raised-button type="submit" [disabled]="eventForm.invalid">CREATE EVENT</button>
+                
+            </form>
+        </mat-card-content>
+    </mat-card>
+</section>

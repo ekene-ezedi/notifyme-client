@@ -1,0 +1,76 @@
+<section>
+  <div>
+      <div id="banner" fxLayout="column" fxLayoutAlign="center" >
+        <form method="post" enctype="multipart/form-data" (change)="onUpload($event)" style="display: none;">
+          <input type="file" name="channelbg" accept="image/*" style="display: none;" #fileInput>
+        </form>
+          <img [src]="channel?.imgurl" alt="channel background" height="300px" width="100%">
+        <button *ngIf="isAdmin" mat-button type="submit" (click)="fileInput.click()" style="position: absolute; top: 90px;"><mat-icon>add_a_photo</mat-icon></button>
+      </div>
+
+      <mat-card>
+          <div fxLayout="row" fxLayoutAlign="space-between">
+              <div>
+                  <h1 style="vertical-align: middle;">{{channel?.name}}</h1>
+                  <small>{{channel?.subscribers.length}} Members</small>
+              </div>
+
+              <button *ngIf="!isAdmin && !channel?.subscribers.includes(user)" id="subscribeBtn" fxFlexAlign="center" mat-button (click)="onSubscribe()">Subscribe</button>
+              <button *ngIf="!isAdmin && channel?.subscribers.includes(user)" id="subscribeBtn" fxFlexAlign="center" mat-button (click)="onUnsubscribe()">unsubscribe</button>
+
+              <div>
+                <button *ngIf="isAdmin" id="editBtn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="options"><mat-icon>more_vert</mat-icon></button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="onCreateEvent()">
+                    <!-- <mat-icon>dialpad</mat-icon> -->
+                    <span>Event + </span>
+                  </button>
+
+                  <button mat-menu-item (click)="onEdit()">
+                    <!-- <mat-icon>dialpad</mat-icon> -->
+                    <span>Edit</span>
+                  </button>
+                  <button mat-menu-item (click)="onDelete()" >
+                    <!-- <mat-icon>voicemail</mat-icon> -->
+                    <span>Delete</span>
+                  </button>
+                </mat-menu>
+              </div>
+          </div>
+          <mat-tab-group mat-align-tabs="center">
+              <mat-tab label="Home">
+                <ng-template matTabContent>
+                  <div fxLayout="column" fxLayoutGap="30px">
+                      <mat-card>
+                          <h3><b>About</b></h3>
+                          <p>{{channel?.description}}</p>
+                      </mat-card>
+
+                      <mat-card>
+                          <h3><b>Admin</b></h3>
+                          <mat-list>
+                              <mat-list-item>
+                              <img matListAvatar [src]="channel?.admin.imgurl" alt="avatar">
+                              <h3 matLine> {{channel?.admin.firstname | uppercase}} </h3>
+                              </mat-list-item>
+                          </mat-list>
+                      </mat-card>
+                  </div>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Events">
+                <ng-template matTabContent>
+                  <mat-tab-group mat-align-tabs="center">
+                      <mat-tab label="Previous">
+                        <app-eventlist></app-eventlist>
+                      </mat-tab>
+                      <mat-tab label="Upcoming">
+                          <app-upcoming-eventlist></app-upcoming-eventlist>
+                      </mat-tab>
+                  </mat-tab-group>
+                </ng-template>
+              </mat-tab>
+            </mat-tab-group>
+      </mat-card>
+  </div>
+</section>

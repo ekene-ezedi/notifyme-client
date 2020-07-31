@@ -1,0 +1,11 @@
+<section>
+  <h1 style="text-align: center;">What are your interests?</h1>
+    <div fxLayout="row wrap" fxLayoutAlign="center">
+      <div fxLayout="row wrap">
+        <button [ngClass]="category.isSelected ? 'clickedColor' : ''" (click)="onSelectCatToggle(category)" *ngFor="let category of categories" mat-stroked-button color="primary" style="margin: 5px 10px;">{{category?.name |uppercase}}</button>
+      </div>
+    </div>
+  <div fxLayoutAlign="end">
+    <button id="nextBtn" mat-fab (click)="loadChannels()"><mat-icon>arrow_right_alt</mat-icon></button>
+  </div>
+</section>
