@@ -29,13 +29,10 @@ export class SidenavComponent implements OnInit {
   }
 
   onLogout(){
-    this.AuthService.logout().subscribe((response)=>{
-      if (response.success) {
-        this.router.navigate(['signin']);
-        this.onCloseSidenav();
-        this.SharedService.isAuth.next(this.AuthService.isAuth());
-      }
-    });
+    localStorage.removeItem('x-auth-token')
+    this.router.navigate(['signin']);
+    this.onCloseSidenav();
+    this.SharedService.isAuth.next(this.AuthService.isAuth());
   }
 
   onDarkModeToggle(){

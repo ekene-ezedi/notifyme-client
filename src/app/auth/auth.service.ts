@@ -53,7 +53,11 @@ export class AuthService {
   }
    //isAuth
    isAuth():boolean{
-    return document.cookie.split(';').some((item)=> item.trim().startsWith('headerPayload')); 
+    if (localStorage.getItem('x-auth-token')) {
+      return true;
+    }else{
+      return false;
+    } 
   }
 
   logout():Observable<any>{

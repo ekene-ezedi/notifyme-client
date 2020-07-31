@@ -34,7 +34,8 @@ export class SharedService {
       return strTime;    
   }
   decodeToken(){
-    let decoded = JSON.parse(atob(document.cookie.split('.')[1]));
+    let token = localStorage.getItem('x-auth-token');
+    let decoded = JSON.parse(atob(token.split('.')[1]));
     return decoded;
   }
 

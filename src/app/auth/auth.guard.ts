@@ -16,14 +16,18 @@ export class AuthGuard implements CanActivate {
         return this.isAuth();
       }
       this.router.navigate(['signin']);
-      this.SharedService.showSnackbar('You have to be logged in!',null,10000);
+      this.SharedService.showSnackbar('You have to be logged in!',null,5000);
       return false;
   }
 
   
   //isAuth
   isAuth():boolean{
-    return document.cookie.split(';').some((item)=> item.trim().startsWith('headerPayload')); 
+    if (localStorage.getItem('x-auth-token')) {
+      return true;
+    }else{
+      return false;
+    } 
   }
   
 }

@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/shared.service';
+import { AuthRoutingModule } from '../auth-routing.module';
 
 @Component({
   selector: 'app-signin',
@@ -32,9 +33,9 @@ export class SigninComponent implements OnInit {
 
     // console.log(form.value)
     this.AuthService.signin(form.value).subscribe((response)=>{   
-      console.log(response)
       if (response.success) {
-      console.log(response)
+      let token = response.token
+      localStorage.setItem('x-auth-token',token);
         this.SharedService.isAuth.next(this.AuthService.isAuth());
         this.router.navigate(['/home']);
       }
