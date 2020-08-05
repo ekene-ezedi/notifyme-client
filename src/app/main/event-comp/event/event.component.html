@@ -1,11 +1,11 @@
 <section>
     <div>
         <div id="banner" fxLayout="column" fxLayoutAlign="center" >
-            <form method="post" enctype="multipart/form-data" (change)="onUpload($event)" style="display: none;">
-              <input type="file" name="channelbg" accept="image/*" style="display: none;" #fileInput>
+            <form method="post" enctype="multipart/form-data" (change)="onUpload($event,uploadform)" style="display: none;" #uploadform="ngForm">
+              <input ngModel type="file" name="channelbg" accept="image/*" style="display: none;" #fileInput>
             </form>
             <img [src]="event?.imgurl" alt="Event background" height="300px">
-            <button *ngIf="isAdmin" mat-button type="submit" (click)="fileInput.click()" style="position: absolute; top: 70px;"><mat-icon>add_a_photo</mat-icon></button>
+            <button *ngIf="isAdmin" mat-button type="submit" (click)="fileInput.click(); fileInput.value = null" style="position: absolute; top: 70px;"><mat-icon>add_a_photo</mat-icon></button>
           </div>
         <div fxLayout fxLayoutAlign="space-between">
             <div fxLayout fxLayoutGap="10px" fxLayoutAlign="start center" style="padding:10px">
@@ -98,10 +98,10 @@
                                     </mat-form-field>
                                 </div>
                 
-                                <mat-form-field>
+                                <!-- <mat-form-field>
                                     <mat-label>{{guest?.img}}</mat-label>
                                     <input ngModel name="img" #imgInput="ngModel" matInput type="text">
-                                </mat-form-field>
+                                </mat-form-field> -->
                 
                                 <div fxLayout fxLayoutAlign="center" fxLayoutGap="30px">
                                     <button style="background-color: red; color:white" mat-raised-button (click)="onDeleteGuest(i)">Delete</button>

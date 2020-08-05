@@ -71,9 +71,9 @@ export class ChannelComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     if (this.selectedFile.type == 'image/jpeg' || this.selectedFile.type == 'image/png') {
       const imgUpload = new FormData();
-      imgUpload.append('channelbg',this.selectedFile,this.selectedFile.name);
+      imgUpload.append('image',this.selectedFile,this.selectedFile.name);
       this.MainService.uploadChannelbg(imgUpload,this.channel._id).subscribe((response)=>{
-        this.channel.imgurl = response.channel.imgurl;
+        this.channel.imgurl = response.image;
       },(error)=>console.log(error));
     }else{
        this.SharedService.showSnackbar('File must be an JPEG or PNG',null,5000);

@@ -6,10 +6,10 @@
         <mat-card *ngFor="let channel of channels" (click)="onChannel(channel._id)" class="pointer" [ngStyle.gt-sm]="{'width':'50%'}" [ngStyle.xs]="{'width':'90%'}">
             <mat-card-content>
                 <div fxLayout fxLayoutGap="20px">
-                    <img mat-card-avatar [src]="channel?.imgurl" [alt]="channel.name" style="width: 50px; height: 50px; border-radius: 100%;">
+                    <img mat-card-avatar [src]="channel?.imgurl" alt="channel name" style="width: 50px; height: 50px; border-radius: 100%;">
                     <div fxLayout="column">
-                        <h1 style="margin-bottom: 0px;  white-space: wrap;">{{channel.name}}</h1>
-                        <small>Members : {{channel.subscribers.length}}</small>
+                        <h1 style="margin-bottom: 0px;  white-space: wrap;">{{channel?.name}}</h1>
+                        <small>Members : {{channel?.subscribers.length}}</small>
                     </div> 
                 </div>
             </mat-card-content>

@@ -92,7 +92,7 @@ export class EventComponent implements OnInit {
     return this.index == i ? 'blue' : 'grey'
   }
   onSave(form:NgForm){
-    form.value.img = '../../../assets/images/ic_person_outline_black_48dp.png';
+    form.value.img = 'https://res.cloudinary.com/dz3c3h3jx/image/upload/v1596669125/assets/ic_person_outline_black_48dp_nfimoe.png';
     this.event.guests.push(form.value);
     this.MainService.addGuest(this.event._id,this.event.guests).subscribe((response)=>{
     if (response.success){
@@ -172,17 +172,19 @@ export class EventComponent implements OnInit {
     },(error)=>console.log(error));
   }
 
-  onUpload(event){
+  onUpload(event,form:NgForm){
     this.selectedFile = event.target.files[0];
+
     if (this.selectedFile.type == 'image/jpeg' || this.selectedFile.type == 'image/png') {
       const imgUpload = new FormData();
-      imgUpload.append('eventbg',this.selectedFile,this.selectedFile.name);
+      imgUpload.append('image',this.selectedFile,this.selectedFile.name);
       this.MainService.uploadEventbg(imgUpload,this.event._id).subscribe((response)=>{
-        this.event.imgurl = response.event.imgurl;
-      },(error)=>console.log(error));
+        this.event.imgurl = response.image;
+      },(error)=>{console.log(error)});
     }else{
        this.SharedService.showSnackbar('File must be a JPEG or PNG',null,5000);
     }
+    form.reset()
   }
 
   onNotifySubscribers(){

@@ -22,9 +22,9 @@ export class ProfileComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     if (this.selectedFile.type == 'image/jpeg' || this.selectedFile.type == 'image/png') {
       const imgUpload = new FormData();
-      imgUpload.append('avatar',this.selectedFile,this.selectedFile.name);
+      imgUpload.append('image',this.selectedFile,this.selectedFile.name);
       this.MainService.uploadAvatar(imgUpload,this.user._id).subscribe((response)=>{
-        this.user.imgurl = response.user.imgurl;
+        this.user.imgurl = response.image;
       },(error)=>console.log(error));
     }else{
        this.SharedService.showSnackbar('File must be an JPEG or PNG',null,5000);

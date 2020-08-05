@@ -3,12 +3,10 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AppConfig } from '../app-config';
 
-const token = localStorage.getItem('x-auth-token')
 //httpoptions
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'x-auth-token': token
+    'Content-Type':  'application/json'
   }),withCredentials: true
   // observe: 'response' as 'response'
 }
@@ -82,23 +80,17 @@ export class MainService {
 
   //upload channel background
   uploadChannelbg(img,id):Observable<any>{
-    return this.http.put(`${this.channelUrl}/upload/${id}`,img,{headers:{
-      'x-auth-token':token
-    },withCredentials:true})
+    return this.http.post(`${this.channelUrl}/upload/${id}`,img,{withCredentials:true})
   }
 
   //upload event background
   uploadEventbg(img,id):Observable<any>{
-    return this.http.put(`${this.eventUrl}/upload/${id}`,img,{headers:{
-      'x-auth-token':token
-    },withCredentials:true});
+    return this.http.post(`${this.eventUrl}/upload/${id}`,img,{withCredentials:true});
   }
 
   //upload user profile pic
   uploadAvatar(img,id):Observable<any>{
-    return this.http.put(`${this.userUrl}/upload/${id}`,img,{headers:{
-      'x-auth-token':token
-    },withCredentials:true})
+    return this.http.post(`${this.userUrl}/upload/${id}`,img,{withCredentials:true})
   }
 
   //update profile

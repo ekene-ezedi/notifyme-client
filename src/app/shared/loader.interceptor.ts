@@ -14,7 +14,13 @@ export class LoaderInterceptor implements HttpInterceptor {
   constructor(public LoaderService:LoaderService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = localStorage.getItem('x-auth-token')
     this.LoaderService.show();
-    return next.handle(request).pipe(finalize(()=>this.LoaderService.hide()))
+    if (token !== null){
+      request = request.clone({
+        setHeaders:{'x-auth-token':token}
+      });
+    }
+    return next.handle(request).pipe(finalize(()=>this.LoaderService.hide()));
   }
 }
