@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { SharedService } from './shared/shared.service';
 
+
+import { SwUpdate} from '@angular/service-worker';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +16,7 @@ export class AppComponent {
   public final:boolean;
   public themeMode:string;
 
-  constructor(private SharedService:SharedService, private AuthService:AuthService) { }
+  constructor(private SharedService:SharedService, private AuthService:AuthService, private update:SwUpdate) { }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -29,5 +32,12 @@ export class AppComponent {
     this.SharedService.themeMode.subscribe((value)=>{
       this.themeMode = value;
     });
+
+    //service worker update
+    if (this.update.isEnabled) {
+      this.update.available.subscribe(()=>{
+        window.location.reload()
+      });
+    }
   }
 }

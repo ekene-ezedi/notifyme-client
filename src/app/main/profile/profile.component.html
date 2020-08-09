@@ -3,8 +3,8 @@
         <input type="file" name="channelbg" accept="image/*" style="display: none;" #fileInput>
     </form>
      
-    <img class="pointer" (click)="fileInput.click(); fileInput.value = null" mat-card-avatar *ngIf="!user?.imgurl" src="../../../assets/images/ic_person_outline_black_48dp.png" alt="avatar">
-    <img class="pointer" (click)="fileInput.click(); fileInput.value = null" *ngIf="user?.imgurl" [src]="user?.imgurl" alt="avatar" width="70px" height="70px" style="border-radius: 50%;">
+    <img class="pointer" (click)="fileInput.click(); fileInput.value = null" mat-card-avatar *ngIf="!user?.imgurl" src="../../../assets/images/ic_person_outline_black_48dp.png" alt="avatar" crossorigin="anonymous" />
+    <img class="pointer" (click)="fileInput.click(); fileInput.value = null" *ngIf="user?.imgurl" [src]="user?.imgurl" alt="avatar" width="70px" height="70px" style="border-radius: 50%;" crossorigin="anonymous" />
 
     <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
         <h3>Basic info</h3>

@@ -4,7 +4,7 @@
         <form method="post" enctype="multipart/form-data" (change)="onUpload($event)" style="display: none;">
           <input type="file" name="channelbg" accept="image/*" style="display: none;" #fileInput>
         </form>
-          <img [src]="channel?.imgurl" alt="channel background" height="300px" width="100%">
+          <img [src]="channel?.imgurl" alt="channel background" height="300px" width="100%" crossorigin="anonymous">
         <button *ngIf="isAdmin" mat-button type="submit" (click)="fileInput.click(); fileInput.value = null" style="position: absolute; top: 90px;"><mat-icon>add_a_photo</mat-icon></button>
       </div>
 
