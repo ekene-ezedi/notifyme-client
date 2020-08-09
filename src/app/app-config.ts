@@ -1,5 +1,5 @@
 export class AppConfig {
-    public apiEndpoint1 = 'https://guarded-tor-61671.herokuapp.com/';
-    public apiEndpoint = 'http://localhost:3000/';
+    public apiEndpoint = 'https://guarded-tor-61671.herokuapp.com/';
+    public apiEndpoint1 = 'http://localhost:3000/';
 
 }
