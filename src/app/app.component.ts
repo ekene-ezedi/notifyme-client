@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { SharedService } from './shared/shared.service';
-
-
 import { SwUpdate} from '@angular/service-worker';
 
 @Component({
@@ -14,7 +12,7 @@ export class AppComponent {
   title = 'Notifyme';
   public initial:boolean;
   public final:boolean;
-  public themeMode:string;
+  public themeMode:string = 'light';
 
   constructor(private SharedService:SharedService, private AuthService:AuthService, private update:SwUpdate) { }
 
@@ -24,11 +22,8 @@ export class AppComponent {
     this.initial = true;
     this.final = false;
 
-    if (localStorage.getItem('themeMode') == null){
-      localStorage.setItem('themeMode','light');
-      this.themeMode = 'light'
-    }
-    
+    localStorage.setItem('themeMode','light');
+
     this.SharedService.themeMode.subscribe((value)=>{
       this.themeMode = value;
     });

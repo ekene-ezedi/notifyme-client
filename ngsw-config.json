@@ -39,6 +39,17 @@
         "maxAge": "12h",
         "strategy": "performance"
       }
+    },
+
+    {
+      "name": "api-requests",
+      "urls": ["/api/users","/api/channel","/api/event"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "1d",
+        "timeout": "10s"
+      }
     }
   ]
 }

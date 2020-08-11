@@ -14,7 +14,7 @@ export class SharedService {
   }
 
   isAuth = new BehaviorSubject<any>(this.AuthService.isAuth());
-  public themeMode = new BehaviorSubject<any>(localStorage.getItem('themeMode'));
+  public themeMode = new BehaviorSubject<any>('light');
 
 
       formatAMPM(date){

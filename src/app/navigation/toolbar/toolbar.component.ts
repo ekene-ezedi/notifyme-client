@@ -11,6 +11,7 @@ export class ToolbarComponent implements OnInit {
 
   @Output() sidenavToggle = new EventEmitter<void>();
   isAuth;
+  logoUrl="https://res.cloudinary.com/dz3c3h3jx/image/upload/v1597099600/assets/notification-icon_hozrck.png";
   constructor(private AuthService:AuthService, private SharedService:SharedService) { }
 
   ngOnInit(): void {
