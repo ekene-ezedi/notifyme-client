@@ -25,6 +25,7 @@ export class VerifyaccountComponent implements OnInit {
       }
     },
     (error)=>{
+      console.log(error)
       this.sharedService.showSnackbar('oops!!, Something went wrong', null, 10000);
     });
   }
