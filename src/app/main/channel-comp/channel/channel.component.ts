@@ -5,6 +5,7 @@ import { SharedService } from 'src/app/shared/shared.service';
 import { DeleteChannelComponent } from './delete-channel.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-channel',
@@ -13,7 +14,8 @@ import { NgForm } from '@angular/forms';
 })
 export class ChannelComponent implements OnInit {
   channel;user;channelId;isAdmin;selectedFile;bannerBg;
-  constructor(private MainService:MainService, private route:ActivatedRoute, private router:Router, private SharedService:SharedService, private dialog:MatDialog) { }
+  readonly publicVapidKey = "BPQPMcza9nW0xOxE8_hGCMSe0H-lpp4MMFv57kZldRFQ2i_wLCuJMcv1oRfmZXi88brXy5s0YNQXWyW5mreGAZk"
+  constructor(private MainService:MainService, private route:ActivatedRoute, private router:Router, private SharedService:SharedService, private dialog:MatDialog, private swPush:SwPush) { }
 
   ngOnInit(): void {
 
@@ -27,11 +29,16 @@ export class ChannelComponent implements OnInit {
   }
   
   onSubscribe(){
-    this.MainService.subscribe(this.channel._id).subscribe((response)=>{
-      if (response.success) {
+    //request subscription
+    this.swPush.requestSubscription({serverPublicKey:this.publicVapidKey})
+    .then(sub=>{
+      this.MainService.subscribe(this.channel._id,sub).subscribe((response)=>{
         this.channel.subscribers = response.channel.subscribers;
-      }
-    },(error)=>console.log(error));
+      },(err)=>{
+        this.SharedService.showSnackbar('There was an error',null,5000)
+      })
+    })
+    .catch((err)=>{console.error('Subscription failed',err)});
   }
 
   onUnsubscribe(){

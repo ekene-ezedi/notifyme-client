@@ -40,7 +40,6 @@ export class SigninComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     }, (error)=>{
-      console.log(error)
       this.errorMsg = {...error};
       if (this.errorMsg.error.verificationDetails) {
         this.isVerified = false;
@@ -51,6 +50,7 @@ export class SigninComponent implements OnInit {
 
   onSendVerificationEmail(){
     let body = {...this.errorMsg.error.verificationDetails}
+    console.log(body)
     this.AuthService.resendVerificationEmail(body).subscribe((response)=>{
     this.responseBody = {...response};
       this.SharedService.showSnackbar(this.responseBody.msg,null,10000);

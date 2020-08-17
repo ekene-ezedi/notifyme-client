@@ -145,12 +145,6 @@ export class EventComponent implements OnInit {
     }else{
       this.event.guests[index].role = form.value.role;
     }
-
-    if (form.value.img == ""){
-      form.value.img = this.event.guests[index].img;
-    }else{
-      this.event.guests[index].img = form.value.img;
-    }
     
     this.MainService.updateGuests(this.route.snapshot.params.id,this.event.guests).subscribe((response)=>{
       if (response.success) {

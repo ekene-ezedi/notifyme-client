@@ -19,6 +19,8 @@ export class VerifyaccountComponent implements OnInit {
     this.AuthService.VerifyAccount(token).subscribe((response)=>{
       responseBody = {...response};
       if (responseBody.success) {
+        localStorage.setItem('x-auth-token',token);
+        this.sharedService.isAuth.next(this.AuthService.isAuth());
         this.router.navigate(['/channelcat']);
       }
     },

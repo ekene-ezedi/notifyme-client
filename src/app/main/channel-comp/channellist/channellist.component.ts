@@ -3,6 +3,7 @@ import { MainService } from 'src/app/main/main.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/shared.service';
 import { NgForm } from '@angular/forms';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-channellist',
@@ -11,8 +12,10 @@ import { NgForm } from '@angular/forms';
 })
 export class ChannellistComponent implements OnInit {
 
-  constructor(private route:ActivatedRoute, private MainService:MainService, private router:Router, private SharedService:SharedService) { }
+  constructor(private route:ActivatedRoute, private MainService:MainService, private router:Router, private SharedService:SharedService, private swPush:SwPush) { }
   channels;user;
+  readonly publicVapidKey = "BPQPMcza9nW0xOxE8_hGCMSe0H-lpp4MMFv57kZldRFQ2i_wLCuJMcv1oRfmZXi88brXy5s0YNQXWyW5mreGAZk"
+
   ngOnInit(): void {
     let categories = this.route.snapshot.queryParams.cat;
     this.user = this.SharedService.decodeToken().email;
@@ -27,11 +30,17 @@ export class ChannellistComponent implements OnInit {
   }
 
   onSubscribe(channel,index){
-    this.MainService.subscribe(channel._id).subscribe((response)=>{
-      if (response.success) {
-        this.channels[index].subscribers = response.channel.subscribers;
-      }
-    },(error)=>console.log(error));
+    //request subscription
+    this.swPush.requestSubscription({serverPublicKey:this.publicVapidKey})
+    .then(sub=>{
+      this.MainService.subscribe(channel._id,sub).subscribe((response)=>{
+        if (response.success) {
+          this.channels[index].subscribers = response.channel.subscribers;
+        }
+      },(error)=>console.log(error));
+      // this.MainService.subscribe(this.channel._id,sub).subscribe((response)=>{},(err)=>{})
+    })
+    .catch((err)=>{console.error('Subscription failed',err)});
   }
 
   onUnsubscribe(channel,index){

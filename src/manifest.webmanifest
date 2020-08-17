@@ -1,11 +1,11 @@
 {
-  "name": "Notifyme",
-  "short_name": "Notifyme",
+  "name": "Notifymeapp",
+  "short_name": "Notifymeapp",
   "theme_color": "#304FFE",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
-  "start_url": "http://localhost:8080/home",
+  "start_url": "https://stark-spire-56927.herokuapp.com/",
   "icons": [
     {
       "src":"assets/icons/android-icon-72x72.png",

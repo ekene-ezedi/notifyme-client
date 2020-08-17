@@ -69,8 +69,8 @@ export class MainService {
   }
 
   //subscribe
-  subscribe(id):Observable<any>{
-    return this.http.put(`${this.channelUrl}/subscribe/${id}`,null,httpOptions);
+  subscribe(id,sub):Observable<any>{
+    return this.http.put(`${this.channelUrl}/subscribe/${id}`,sub,httpOptions);
   }
 
   //subscribe

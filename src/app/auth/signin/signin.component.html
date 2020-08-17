@@ -38,9 +38,11 @@
         </mat-card-footer>
     </mat-card>
 
-    <mat-card *ngIf="!isVerified" fxLayout="column" fxLayoutAlign="center center" style="margin: 20px;">
-        <h3>Your account has not been verified, check your email for a verification link</h3>
-        <h3>OR</h3>
-        <button mat-button style="background-color: #304FFE; color: white;" (click)="onSendVerificationEmail()">Resend Verification Link</button>
+    <mat-card *ngIf="!isVerified">
+        <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+            <h3>You need to verify your account, check your email for a verification link</h3>
+            <h3>OR</h3>
+            <button mat-button style="background-color: #304FFE; color: white;" (click)="onSendVerificationEmail()">Resend Verification Link</button>
+        </mat-card-content>
     </mat-card>
 </div>
