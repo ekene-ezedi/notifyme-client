@@ -12,8 +12,8 @@
         <mat-card-content>
             <div [routerLink]="['/event',event._id]" class="pointer">
                 <h2>{{event?.name}}</h2>
-                <img *ngIf="!event?.imgurl" src="../../../../assets/images/images-button.png" alt="banner" height="300px" style="opacity:0.5">
-                    <img *ngIf="event?.imgurl" [src]="event?.imgurl" alt="banner" style="height: auto; width:100%">
+                <p>diplay me</p>
+                <img *ngIf="event?.imgurl" [src]="event?.imgurl" alt="banner" style="height: 300px; width:100%">
                 <p>{{SharedService.truncateTxt(event?.description)}}</p>
             </div>
 
