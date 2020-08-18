@@ -41,7 +41,7 @@ import { environment } from '../environments/environment';
     MainModule,
     SharedModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('sw.js', { enabled: environment.production })
     
   ],
   providers: [LoaderService,{provide:HTTP_INTERCEPTORS, useClass:LoaderInterceptor,multi:true}],

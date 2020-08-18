@@ -43,7 +43,7 @@ export class AppComponent {
       this.push.notificationClicks.subscribe(({action,notification})=>{
       console.log('click working');
         console.log(notification);
-        window.open(notification.data.url);
+        // window.open(notification.data.url);
       })
     }
   }
