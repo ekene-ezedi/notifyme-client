@@ -3,7 +3,7 @@
   "short_name": "Notifyme",
   "theme_color": "#304FFE",
   "background_color": "#fafafa",
-  "display": "fullscreen",
+  "display": "standalone",
   "start_url": "https://stark-spire-56927.herokuapp.com/home",
   "icons": [
     {
