@@ -13,6 +13,7 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.MainService.getEventsAttending().subscribe((response)=>{
+      console.log(response)
       this.events = response.events;
     },(error)=>console.log(error));
   }
