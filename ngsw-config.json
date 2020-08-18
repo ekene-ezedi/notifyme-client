@@ -43,7 +43,11 @@
 
     {
       "name": "api-requests",
-      "urls": ["/api/users","/api/channel","/api/event"],
+      "urls": [
+        "https://guarded-tor-61671.herokuapp.com/api/users",
+        "https://guarded-tor-61671.herokuapp.com/api/channel",
+        "https://guarded-tor-61671.herokuapp.com/api/event"
+      ],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 100,
