@@ -37,7 +37,7 @@ export class CreateComponent implements OnInit {
         this.router.navigate(['channel', response.channel._id]);
       }
     }, (error)=>{
-      this.SharedService.showSnackbar('oops!, there was an error',null,5000)
+      this.SharedService.showSnackbar(error.msg,null,5000)
     });
   }
 
