@@ -35,16 +35,6 @@ export class AppComponent {
       });
     }
 
-    //notification click event
-    // this.push.messages.subscribe((messages)=>console.log(messages));
-
-    if (this.push.isEnabled) {
-      console.log('push enabled');
-      this.push.notificationClicks.subscribe(({action,notification})=>{
-      console.log('click working');
-        console.log(notification);
-        // window.open(notification.data.url);
-      })
-    }
+    
   }
 }
