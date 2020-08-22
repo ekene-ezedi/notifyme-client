@@ -15,7 +15,8 @@
         
                 <mat-form-field appearance="outline">
                     <mat-label>Enter password</mat-label>
-                    <input ngModel name="password" #password="ngModel" required matInput type="password" placeholder="Enter password">
+                    <input ngModel name="password" #password="ngModel" required matInput [type]="visibility ? 'text':'password'" placeholder="Enter password">
+                    <mat-icon matSuffix style="cursor: pointer;" (click)="toggleVisibility()">{{visibility ? 'visibility' : 'visibility_off'}}</mat-icon>
                     <mat-error [hidden]="password.valid" >Password field cannot be empty</mat-error>
                 </mat-form-field>
                 <button  mat-raised-button color="primary" type="submit">Signin</button>

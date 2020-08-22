@@ -18,6 +18,7 @@ export class SigninComponent implements OnInit {
   responseBody;
   errorMsg;
   isVerified:boolean = true;
+  visibility:boolean = false; 
 
   constructor(private AuthService:AuthService,private router:Router,private SharedService:SharedService) { }
 
@@ -58,6 +59,14 @@ export class SigninComponent implements OnInit {
       this.errorMsg = {...error};
       this.SharedService.showSnackbar(this.errorMsg.error.error,null,10000);
     });
+  }
+
+  toggleVisibility(){
+    if (this.visibility == true) {
+      this.visibility = false;
+    }else{
+      this.visibility = true;
+    }
   }
 
 }
