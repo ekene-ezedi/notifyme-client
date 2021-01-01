@@ -20,6 +20,7 @@ import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 import { DeleteChannelComponent } from './main/channel-comp/channel/delete-channel.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ScullyLibModule } from '@scullyio/ng-lib';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { environment } from '../environments/environment';
     MainModule,
     SharedModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('sw.js', { enabled: environment.production })
+    ServiceWorkerModule.register('sw.js', { enabled: environment.production }),
+    ScullyLibModule
     
   ],
   providers: [LoaderService,{provide:HTTP_INTERCEPTORS, useClass:LoaderInterceptor,multi:true}],

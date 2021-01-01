@@ -1,23 +1,44 @@
 <section>
-    <h1 *ngIf="channels?.length !== 0" style="text-align: center;">Channels you created</h1>
-    <h3 *ngIf="channels?.length == 0" style="text-align:center">You haven't created any channel yet</h3>
+  <h1 *ngIf="channels?.length !== 0" style="text-align: center">
+    Channels you created
+  </h1>
+  <h3 *ngIf="channels?.length == 0" style="text-align: center">
+    You haven't created any channel yet
+  </h3>
 
-    <div fxLayout="column" fxLayoutAlign="center center">
-        <mat-card *ngFor="let channel of channels" (click)="onChannel(channel._id)" class="pointer" [ngStyle.gt-sm]="{'width':'50%'}" [ngStyle.xs]="{'width':'90%'}">
-            <mat-card-content>
-                <div fxLayout fxLayoutGap="20px">
-                    <img mat-card-avatar [src]="channel?.imgurl" alt="channel name" style="width: 50px; height: 50px; border-radius: 100%;">
-                    <div fxLayout="column">
-                        <h1 style="margin-bottom: 0px;  white-space: wrap;">{{channel?.name}}</h1>
-                        <small>Members : {{channel?.subscribers.length}}</small>
-                    </div> 
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <mat-card
+      *ngFor="let channel of channels"
+      (click)="onChannel(channel._id)"
+      class="pointer"
+      [ngStyle.gt-sm]="{ width: '50%' }"
+      [ngStyle.xs]="{ width: '90%' }"
+    >
+      <mat-card-content>
+        <div fxLayout fxLayoutGap="20px">
+          <img
+            mat-card-avatar
+            [src]="channel?.imgurl"
+            alt="channel name"
+            style="width: 50px; height: 50px; border-radius: 100%"
+          />
+          <div fxLayout="column">
+            <h1 style="margin-bottom: 0px; white-space: wrap">
+              {{ channel?.name }}
+            </h1>
+            <small>Members : {{ channel?.subscribers.length }}</small>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-    <div fxLayoutAlign="end">
-        <button fxHide.gt-xs id="addChannelBtnSm" (click)="onCreateChannel()"><mat-icon>add</mat-icon></button>
-        <button fxHide.xs id="addChannelBtnLg" (click)="onCreateChannel()"><mat-icon>add</mat-icon></button>
-    </div>
+  <div fxLayoutAlign="end">
+    <button fxHide.gt-xs id="addChannelBtnSm" (click)="onCreateChannel()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button fxHide.xs id="addChannelBtnLg" (click)="onCreateChannel()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </section>
